@@ -1,0 +1,131 @@
+//Syntax: Please add  ; to end of every criteria statement
+
+[UUT LAN Setting]
+UUT_STATIC_IP=10.41.86.113; /* 待測物的固定IP,在做TFTP 燒錄檔案時需要設定 */
+
+
+TFTP_Remote_IP=10.41.86.109;
+/* Note: Remote PC need pre-install a TFTP server software */
+/* 在做TFTP 燒錄檔案時,需設定連到PC TFTP SEVER 那個IP */
+
+[TFTP Result Setting]
+TFTP_Result_ENABLE=NO;    /* Yes or NO for sending the log file to remote PC through tftp */
+
+
+
+//產線上172.30.37.225, OA LAN上為 10.41.16.225 . Webserver:10.41.16.225:88
+//Taipei RD use 10.34.65.35:88
+
+
+//OperatorID:請TE 透過WEB Browser在MCS SERVER 欄位的Operator group: KT_SERIES 建立
+//10.41.16.127:136
+//10.41.21.182:136
+
+//http://10.41.16.127:136/Tester.WebService/WebService.asmx
+
+[ShopFlow System] 
+SFCS_SYSTEM_ENABLE=YES; /* YES or NO for Sending report to SFCS System */
+////產線上172.30.31.58:137;
+// 172.30.81.127:136
+//WIH 10.38.30.12 & 172.30.88.12
+SFCS_IP=172.30.88.12;
+SFCS_EQUIPMENT=PC; /* Switch to MB LAN , PC=Do nothing to switch BS or MB LAN */
+SFCS_STAGE=TD;
+SFCS_Line=PB;
+SFCS_STATION=TD;
+SFCS_Category=upn;
+SFCS_MAC_Category=06;
+SFCS_ID_TYPE=5;
+SFCS_Sequence=1;
+SFCS_COMCODE=81.66V10.004G;
+SFCS_USNLength=12;
+SFCS_OperatorID=Unknown;
+SFCS_Route_Table=-p add 172.30.0.0 mask 255.255.0.0 172.30.57.1;
+MCS_SERVER=Disable;
+
+[RTC Pass Critera]
+Tolerance_timesec_gap=1;
+RTC_DEFAULT_ELAPSED_TIME=300; /*從電池組裝後到開始測試 需大於300秒 */
+
+ 
+
+[IP WEB Switch]
+IP_POWER_WEB_SWITCH_IP=192.11.13.2; /* 不能設成與PC IP 一樣 */
+IP9258_ACCOUNT_PASSWORD=admin=12345678;
+/* Port1 0n , port2~4 off 則為1000 */
+/* Port1~port3 off port4 on 則為0001 */
+/* 4 Port all on  則為1111 */
+IP9258_POWER-ON_CMD=0001;
+IP_POWER_WEB_SWITCH_SN=00-0C-C8-02-4B-26; /* IP9258 不需給MAC */
+
+/* 很重要當測試項目NG,需告訴S8300_MAIN_PROGRAM 是用IP9258或IP SWITCH 來POWER OFF */
+/* IP9258_POWER_Off_WebSwitch.exe 或 IP_POWER_Off_WebSwitch_Control.exe */
+IP_POWER_OFF_EXE_FILENAME=S8300E_PWOff_IP9258.exe;
+
+
+ 
+[UUT Log File Prefix Setting]
+RESULT_LOGFileName_PREFIX=S8300E-;
+
+[MISC]
+UUT_SHUTDOWN_OFF_EXE_FILENAME=S8300E_shutdown_UUT.exe;
+UUT_BIOS_VERSION=R03;
+//3.11.10-301.fc20.x86_64
+//3.13.0-32-generic
+UUT_OS_VERSION=3.13.0-32-generic;
+UUT_BIST_VERSION=01.00;
+UUT_CPLD_VERSION=0x45;
+UUT_VintageNumber=0x01;
+UUT_CircuitPack_SUFFIX=0x04;
+UUT_PORT1_IP=192.11.13.6;
+UUT_PORT2_IP=192.11.13.4;
+UUT_PORT3_IP=192.11.13.7;
+TELNET_IP=192.11.13.7;
+
+TELNET_ID=S8300e;
+TELNET_PASSWORD=S8300e;
+//  /home/s8300e/workplace/s8300e_func_test;
+//  /home/s8300e/workplace/s8300e_func_test_fedora
+TELNET_PATH=/home/s8300e/workplace/s8300e_func_test;
+
+// Reliability used
+// s8300e@localhost
+
+// Factory Used
+// s8300e@s8300e;
+TELNET_KEYWORD1_AFTERLOG_IN= s8300e@s8300e;
+
+// Reliability used
+// root@localhost s8300e_func_test_fedora
+
+// Factory USED
+// 8300e_func_test#;
+TELNET_KEYWORD2_AFTERLOG_IN=8300e_func_test;
+
+UUT_PORT1_LINK_SPEED=1000MB;
+UUT_PORT2_LINK_SPEED=1000MB;
+UUT_PORT3_LINK_SPEED=1000MB;
+UUT_PORT1_DEVICE_ID=8086-1533;
+UUT_PORT2_DEVICE_ID=8086-1533;
+UUT_PORT3_DEVICE_ID=8086-1533;
+UUT_SUPERIO_ID=Found IT8612F chip at 0xa20;
+UUT_CLOCK_GEN_ID=0X43;
+UUT_ME_FW_VERSION=;
+
+UUT_LAN_FW_VERSION=3.25;
+UUT_BootUp_DELAY_TIME=65; /* second */
+NO_POWER_ELAPSED_TIME=15; /* second */
+UUT_DELAY_PURPOSE1_TIME=3;    /* second */
+UUT_DELAY_PURPOSE2_TIME=2;    /* second */
+UUT_SATA_HDD_SZIE=320 GB;
+UUT_SATA_HDD_MODEL=HGST HTE725032A7E630;
+UUT_MEMORY_SIZE_SLOT1=8192 MB;
+UUT_MEMORY_SIZE_SLOT2=8192 MB;
+UUT_MCU_FW_VERSION=0B.07;
+UUT_MCU_DEVICE_ID=0x1684;
+TEST_BOARD_PIC_PRES_VOLTAGE_MAX=0.008;
+TEST_BOARD_DC_UPPER_LIMIT=5.5;
+TEST_BOARD_DC_LOWER_LIMIT=4.5;
+TEST_BOARD_VER=2015-07-01;
+S8300E_SW_PACKAGE_VER=A5; 
+SHUTDOWN_TIMEOUT_SEC=70;
